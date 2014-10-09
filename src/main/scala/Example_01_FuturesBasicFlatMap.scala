@@ -10,10 +10,10 @@ object Example_01_FuturesBasicFlatMap extends Example_00_Futures {
 
     fRankingForUser
       .flatMap(
-        basicProfile =>
+        ranking =>
           fbasicProfileForUser
             .flatMap(
-              ranking =>
+              basicProfile =>
                 fLastMedalInLevel(basicProfile)
                   .map(
                     lastMedal => s"$basicProfile;$ranking;$lastMedal"

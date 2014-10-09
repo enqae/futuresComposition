@@ -38,13 +38,13 @@ public class Example_02_FutureComposableFlatMap {
                             return basicProfile.endsWith("MoonWalker") ? "MoonConquest" : "NoMedalYet";
                         });
 
-        return fBasicProfile
+        return fRanking
                 .thenComposeAsync(
-                        basicProfile -> fRanking
+                        ranking -> fBasicProfile
                                 .thenComposeAsync(
-                                        level -> lastMedalInLevel.apply(level)
+                                        basicProfile -> lastMedalInLevel.apply(basicProfile)
                                                 .thenApplyAsync(
-                                                        lm -> String.format("%s;%s;%s", basicProfile, level, lm)
+                                                        lm -> String.format("%s;%s;%s", basicProfile, ranking, lm)
                                                 )
                                 )
                 );
